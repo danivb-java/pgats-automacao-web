@@ -11,12 +11,21 @@ import {
 
 import { faker } from '@faker-js/faker';
 
+//import { navegarParaLogin } from `../modules/menu`
+import menu from `../modules/menu`
+//import { preencherFormularioDePreCadastro } from `../modules/login`
+import login from `../modules/login`
+import cadastro from '../modules/cadastro';
+
 
 describe('Automation Exercise', () => {
   beforeEach(() => {
     cy.viewport(400, 700)
     cy.visit('https://automationexercise.com/')
-    cy.get('a[href="/login"]').click()
+    //cy.get('a[href="/login"]').click()
+    
+    //navegarParaLogin()
+    menu.navegarParaLogin()
   })
 
   it('Exemplos de logs', () => {
@@ -36,46 +45,25 @@ describe('Automation Exercise', () => {
   })
 
 
-  it.only('Cadastrar um usuario', () => {
-    const timestamp = new Date().getTime()
+  it('Cadastrar um usuario', () => {
+    //Arrange
+  
+    //Preencher o formulario de pre cadastro
+    // const firstName = faker.person.firstName()
+    // const lastName = faker.person.lastName()
 
-    const firstName = faker.person.firstName()
-    const lastName = faker.person.lastName()
+    // cy.get('[data-qa="signup-name"]').type(`${firstName} ${lastName}`)
+    // cy.get('[data-qa="signup-email"]').type(getRandomEmail())
+    // cy.contains('button', 'Signup').click()
 
-    cy.get('a[href="/login"]').click()
-
-    cy.get('[data-qa="signup-name"]').type(`${firstName} ${lastName}`)
-    cy.get('[data-qa="signup-email"]').type(`qa-tester-${timestamp}@test.com`)
-    cy.contains('button', 'Signup').click()
-
+    //preencherFormularioDePreCadastro()
+    login.preencherFormularioDePreCadastro() 
+    
+    // preencherFormularioDecadastroCompleto
+     cadastro.preencherFormularioDeCadastroCompleto()
     // radio ou checkboxes -> check
     // cy.get('#id_gender2).check()
-    cy.get('input[type=radio]').check('Mrs')
-
-    cy.get('input#password').type('123' , { log: false }) //log: false usado para nao exibir os dados da senha
-
-    //para comboboxes ou selects -> select
-    cy.get('[data-qa=days]').select('20')
-    cy.get('select[data-qa=months]').select('September')
-    cy.get('[data-qa=years]').select('1992')
-
-    cy.get('input[type=checkbox]#newsletter').check()
-    cy.get('input[type=checkbox]#optin').check()
     
-    cy.get('input#first_name').type(firstName)
-    cy.get('input#last_name').type(lastName)
-    cy.get('input#company').type(`PGATS ${faker.company.name()}`)
-    cy.get('input[data-qa=address]').type(faker.location.streetAddress())
-    cy.get('select[data-qa=country]').select('Canada')
-    cy.get('input#state').type(faker.location.state())
-    cy.get('input#city').type(faker.location.city())
-    cy.get('[data-qa="zipcode"]').type(faker.location.zipCode())
-    cy.get('[data-qa="mobile_number"]').type('11 99856 3254')
-
-    // Triplo A - Arrange - Act, Assert
-
-    //Act
-    cy.get('[data-qa="create-account"]').click()
 
      //Assert
     cy.url().should('includes', 'account_created') //valida o texto da url
@@ -88,32 +76,42 @@ describe('Automation Exercise', () => {
 
   it('Login de usuario com e-mail e senha corretos', () => {
 
-    cy.get('[data-qa="login-email"]').type('qa-tester-1759532019098@test.com')
-    cy.get('[data-qa="login-password"]').type('123')
+    // cy.get('[data-qa="login-email"]').type('qa-tester-1759532019098@test.com')
+    // cy.get('[data-qa="login-password"]').type('123')
 
-    cy.get('[data-qa="login-button"]').click()
+    // cy.get('[data-qa="login-button"]').click()
     //cy.get('i.fa-user').parent().should('contain', 'QA Tester')
-    cy.contains('b', 'QA Tester')
+
+    login.preencherFormularioDeLogin(userData.user, userData.password)
+
+    // cy.contains('b', 'QA Tester')
 
   });
 
   it('Login de usuario com e-mail e senha incorretos', () => {
 
-    cy.get('[data-qa="login-email"]').type('qa-tester-1759532019098@test.com')
-    cy.get('[data-qa="login-password"]').type('54123')
+    // cy.get('[data-qa="login-email"]').type('qa-tester-1759532019098@test.com')
+    // cy.get('[data-qa="login-password"]').type('54123')
 
-    cy.get('[data-qa="login-button"]').click()
+    // cy.get('[data-qa="login-button"]').click()
+
+    login.preencherFormularioDeLogin(userData.user, `54321`)
+    
     cy.get(`.login-form > form > p`).should('contain', 'Your email or password is incorrect!')
 
   });
 
   it('Logout de usuario', () => {
+    //Arrange
 
-    cy.get('[data-qa="login-email"]').type('qa-tester-1759532019098@test.com')
-    cy.get('[data-qa="login-password"]').type('123')
+    // cy.get('[data-qa="login-email"]').type('qa-tester-1759532019098@test.com')
+    // cy.get('[data-qa="login-password"]').type('123')
 
-    cy.get('[data-qa="login-button"]').click()
-    cy.contains('b', 'QA Tester')
+    // cy.get('[data-qa="login-button"]').click()
+
+    login.preencherFormularioDeLogin(userData.user, userData.password)
+
+    //cy.contains('b', 'QA Tester')
 
     cy.get('a[href="/logout"]').click()
 
