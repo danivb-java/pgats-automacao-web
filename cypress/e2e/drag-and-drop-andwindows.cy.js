@@ -19,8 +19,8 @@ describe(`Drag ans Drop ans Windows`, () =>  {
         cy.visit(`https://the-internet.herokuapp.com/drag_and_drop`)
 
         const dataTransfer = new DataTransfer
-        cy.contains(`A`).trigger('dragstart', { dataTransfer })
-        cy.contains(`B`).trigger('drop', { dataTransfer })
+        cy.contains('A').trigger('dragstart', { dataTransfer })
+        cy.contains('B').trigger('drop', { dataTransfer })
 
 
     })
