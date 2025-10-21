@@ -15,14 +15,14 @@ jobs:
         run: node --version
 
       - name: Instalando dependências
-        run: npm install
+        run: npm install --force
 
       - name: Ensure cypress executable has execute permission (fix Permission denied)
         run: |
           if [ -f ./node_modules/.bin/cypress ]; then chmod +x ./node_modules/.bin/cypress || true; fi
 
       - name: Executando os testes
-        run: npx cypress run
+        run: npx cypress run --browser edge
 
       - name: Upload screenshots on failure
         if: failure()
