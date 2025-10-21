@@ -2,7 +2,7 @@
   "name": "QA Tester",
   "email": "hello@cypress.io",
   "subject": "Suppot",
-  "message": "xxxxx",
+  "message": "Testing using fixtures and opload",
   "body": "Fixtures are a great way to mock data for responses to routes",
   "user": "qa-tester-1759532019098@test.com",
   "password": "12345"
