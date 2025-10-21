@@ -17,5 +17,24 @@ jobs:
       - name: Instalando dependências
         run: npm install
 
+      - name: Ensure cypress executable has execute permission (fix Permission denied)
+        run: |
+          if [ -f ./node_modules/.bin/cypress ]; then chmod +x ./node_modules/.bin/cypress || true; fi
+
       - name: Executando os testes
         run: npx cypress run
+
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload videos on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
