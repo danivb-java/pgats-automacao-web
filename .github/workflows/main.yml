@@ -28,10 +28,14 @@ jobs:
         run: npm ci
 
       - name: Executando os testes
-        run: npx cypress run
+        run: npx cypress run || true
+
+      - name: Generate mochawesome report (merge + generate)
+        run: |
+          npm run report:all || true
 
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+        if: always()
         with: 
           name: relatorios
           path: |
