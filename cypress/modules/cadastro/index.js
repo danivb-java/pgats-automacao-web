@@ -3,6 +3,9 @@ import { faker } from '@faker-js/faker'
 
 class Cadastro {
     preencherFormularioDeCadastroCompleto() {
+        const firstName = faker.person.firstName()
+        const lastName = faker.person.lastName()
+
     cy.get('input[type=radio]').check('Mrs')
 
     cy.get('input#password').type('123' , { log: false }) //log: false usado para nao exibir os dados da senha
