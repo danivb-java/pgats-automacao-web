@@ -1,5 +1,5 @@
 
-import { faker } from `@faker-js/faker`
+import { faker } from '@faker-js/faker'
 
 class Login {
     preencherFormularioDePreCadastro() {
@@ -7,7 +7,7 @@ class Login {
         const lastName = faker.person.lastName()
 
         cy.get('[data-qa="signup-name"]').type(`${firstName} ${lastName}`)
-        cy.get('[data-qa="signup-email"]').type(getRandomEmail())
+        cy.get('[data-qa="signup-email"]').type(faker.internet.email)
 
         cy.contains('button', 'Signup').click()
     }

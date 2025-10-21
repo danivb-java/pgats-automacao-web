@@ -9,7 +9,7 @@ describe(`Drag ans Drop ans Windows`, () =>  {
         .invoke('removeAttr', 'target')
         .click()
 
-        cy.get('h3').should('have.next', 'New Window')
+        cy.get('h3').should('have.text', 'New Window')
 
         cy.go('back')
         cy.get('h3').should('have.text', 'Opening a new window')
