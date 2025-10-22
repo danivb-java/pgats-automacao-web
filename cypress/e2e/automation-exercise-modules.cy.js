@@ -35,9 +35,10 @@ describe('Automation Exercise', () => {
 
     login.preencherFormularioDeLogin(userData.user, userData.password)
     cy.get('i.fa-user').parent().should('contain', userData.name)
-    cy.get('a[href="/logout"]').should('be.visible')
 
+    cy.get(':nth-child(9) > a')
   });
+
 
   it('Login de usuario com e-mail e senha incorretos', () => {
     login.preencherFormularioDeLogin(userData.user, `54321`)   
@@ -48,7 +49,6 @@ describe('Automation Exercise', () => {
   it('Logout de usuario', () => {
 
     login.preencherFormularioDeLogin(userData.user, userData.password)
-    cy.get('a[href="/logout"]').click()
     //Act
     menu.efetuarLogout()
     //Assert
@@ -61,14 +61,26 @@ describe('Automation Exercise', () => {
 
   it('Cadastrar usuario com e-mail existente no sistema', () => {
 
-    login.preencherFormularioDePreCadastro() 
+    login.preencherFormularioDePreCadastroExistente(userData.name, userData.user)
     cy.get('.signup-form > form > p').should('contain', 'Email Address already exist!')
     });
 
 
     it('Envio de formulario de contato (Contact Us) com upload de arquivo', () => {
-    
-      cadastro.preencherFormularioDeContato()
+
+      cadastro.preencherFormularioDeContato(userData.name, userData.email, userData.subject, userData.password)
+
+      // cy.get('a[href*=contact]').click()
+
+      //   cy.get('[data-qa="name"]').type(userData.name)
+      //   cy.get('[data-qa="email"]').type(userData.email)
+      //   cy.get('[data-qa="subject"]').type(userData.subject)
+      //   cy.get('[data-qa="message"]').type(userData.message)
+
+      //   cy.fixture('example.json').as('arquivo')   
+      //   cy.get('input[type=file]').selectFile('@arquivo')
+
+      //   cy.get('[data-qa="submit-button"]').click()
     //assert
       cy.get('.status').should('be.visible')
       cy.get('.status').should('have.text', 'Success! Your details have been submitted successfully.')

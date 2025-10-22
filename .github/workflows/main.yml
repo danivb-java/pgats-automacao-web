@@ -42,3 +42,4 @@ jobs:
             cypress/reports
             cypress/screenshots
             cypress/videos
+          retention-days: 15

@@ -11,11 +11,10 @@ module.exports = defineConfig({
       reportDir: 'cypress/reports',
       overwrite: false,
       html: false,
-      json: true
-    },
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-      require('cypress-mochawesome-reporter/plugin')(on);
+      json: true,
+      baseUrl: "https://automationexercise.com/",
+      video: true, // habilita gravação de vídeo
+      browser: "chromium",
     },
   },
 });
