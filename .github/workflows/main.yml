@@ -34,12 +34,21 @@ jobs:
         run: |
           npm run report:all || true
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Tests results
+        uses: actions/upload-artifact@v4
         if: always()
         with: 
-          name: relatorios
+          name: relatorios dos testes
           path: |
             cypress/reports
             cypress/screenshots
             cypress/videos
+          retention-days: 15
+
+      - name: Upload Mochawesome Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mochawesome-report-trabalho-final
+          path: cypress/reports/
           retention-days: 15

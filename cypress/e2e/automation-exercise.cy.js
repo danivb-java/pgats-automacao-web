@@ -36,7 +36,7 @@ describe('Automation Exercise', () => {
   })
 
 
-  it.only('Cadastrar um usuario', () => {
+  it('Cadastrar um usuario', () => {
     const timestamp = new Date().getTime()
 
     const firstName = faker.person.firstName()
