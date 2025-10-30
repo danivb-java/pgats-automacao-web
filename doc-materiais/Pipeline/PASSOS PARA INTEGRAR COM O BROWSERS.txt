@@ -1,0 +1,14 @@
+PASSOS PARA INTEGRAR COM O BROWSERSTACK - TESTES EM NUVEM
+
+- npm install -g browserstack-cypress-cli
+- browserstack-cypress init
+
+- atualizar o username e acess_key no arquivo criado browserstack.json
+- reduzir ao máximo a combinação de browsers no arquivo acima (ideal deixa so 1)
+- atualizar o run_settings.cypress_config_file para o caminho do arquivo config do cypress
+- adicionar o run_settings.cypress_version om a versão do cypress que quiser usar
+- atualizar o run_settings.project_name om o nome do nosso projeto
+- atualizar o run_settings.parallels para 1
+- adicionar dependências que foram usadas no projeto no run_settings.npm.dependencies
+
+- executar os testes cm o comando: run --sync --spec <caminho do arquivo de teste - spec>

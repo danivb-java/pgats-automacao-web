@@ -1,0 +1,32 @@
+COMO CRIAR UMA PIPELINE
+
+- projeto foi clonado para a maquia
+- Node esta instalado
+- npm install / yarn install  (para garantir a instalação de todas as dependências do configuradas no package.json ocorram)
+- executar os testes em modo headless (npx cypress run (rodar os testes)
+- salvar os artefatos gerados durante os testes (gerar relatórios)
+
+
+EXEMPLO DE CODIGO DA PIPELINE
+
+name: Web E2E Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      # clone do projeto para a máquina
+      - uses: actions/checkout@v4
+
+      # Conferir a versão instalada
+      - name: Node version
+        run: node --version
+
+      - name: Instalando dependências
+        run: npm install
+
+      - name: Executando os testes
+        run: npx cypress run
